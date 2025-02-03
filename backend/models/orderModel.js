@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { interactionTargetMap } = require('web-vitals/attribution/onINP.js');
 
 const orderSchema = new mongoose.Schema({
     buyerId: {
