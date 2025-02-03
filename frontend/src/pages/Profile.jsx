@@ -84,7 +84,7 @@ const Profile = () => {
   };
   const handleSave = async (field) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${user.user._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/${user.user._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/user/password/${user.user._id}`, {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/user/password/${user.user._id}`, {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       });

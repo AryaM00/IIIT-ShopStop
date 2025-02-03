@@ -40,7 +40,7 @@ const SellerDetail = () => {
   useEffect(() => {
     const fetchSellerData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/user/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/${id}`);
         const data = await response.json();
         if (response.ok) {
           setSeller(data);
@@ -59,7 +59,7 @@ const SellerDetail = () => {
 
   const handleSubmitReview = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/reviews/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/reviews/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

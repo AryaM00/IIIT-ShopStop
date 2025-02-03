@@ -41,7 +41,7 @@ const ProductDetail = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:5000/api/user/cart/add', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,13 +73,13 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`);
         if (!response.ok) throw new Error('Product not found');
         const data = await response.json();
         setProduct(data);
         
         // Fetch seller details
-        const sellerResponse = await fetch(`http://localhost:5000/api/user/${data.sellerId}`);
+        const sellerResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/${data.sellerId}`);
         console.log('sellerResponse', sellerResponse);
         if (sellerResponse.ok) {
           const sellerData = await sellerResponse.json();

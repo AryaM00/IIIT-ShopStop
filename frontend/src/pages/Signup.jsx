@@ -67,7 +67,7 @@ const Signup = () => {
     setLoading(true);
     try {
       // API call to your backend
-      const response = await fetch('http://localhost:5000/api/user/signup', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

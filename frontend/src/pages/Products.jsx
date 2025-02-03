@@ -82,7 +82,7 @@ const Products = () => {
         quantity: 1
       }
       console.log('tosend',tosend);
-      const response = await fetch('http://localhost:5000/api/user/cart/add', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

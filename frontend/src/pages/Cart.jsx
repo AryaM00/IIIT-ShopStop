@@ -39,7 +39,7 @@ const Cart = () => {
       }
       console.log('user', user);
       try {
-        const response = await fetch(`http://localhost:5000/api/user/cart/${user._id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/${user._id}`);
         console.log(response);
         if (!response.ok) throw new Error('Failed to fetch cart');
         const data = await response.json();
@@ -59,7 +59,7 @@ const Cart = () => {
     try {
       // First fetch product details for each cart item
       const orderItems = await Promise.all(cartItems.map(async (item) => {
-        const productResponse = await fetch(`http://localhost:5000/api/products/${item.product._id}`);
+        const productResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${item.product._id}`);
         const productData = await productResponse.json();
         
         return {
@@ -77,7 +77,7 @@ const Cart = () => {
       }));
   
       // Create order
-      const response = await fetch('http://localhost:5000/api/orders/create', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -94,7 +94,7 @@ const Cart = () => {
       
       // Clear cart
       
-      await fetch(`http://localhost:5000/api/user/cart/clear/${user._id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/clear/${user._id}`, {
         method: 'DELETE'
       });
   
@@ -122,7 +122,7 @@ const Cart = () => {
 
   const handleQuantityChange = async (productId, change) => {
     try {
-      const response = await fetch('http://localhost:5000/api/user/cart/update', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -144,7 +144,7 @@ const Cart = () => {
 
   const handleRemoveItem = async (productId) => {
     try {
-      const response = await fetch('http://localhost:5000/api/user/cart/remove', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/cart/remove`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
