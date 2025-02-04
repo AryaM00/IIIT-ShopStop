@@ -49,16 +49,32 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products/>}/>
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/seller/:id" element={<SellerDetail />} />
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/caslogin" element={<CasLogin/>}/>
 
             
             {/* Protected Routes */}
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }/>
+            <Route path="/products" element={
+              <ProtectedRoute>
+                <Products/>
+              </ProtectedRoute>
+            }/>
+            <Route path="/product/:id" element={
+              <ProtectedRoute>
+                <ProductDetail />
+              </ProtectedRoute>
+            }/>
+            <Route path="/seller/:id" element={
+              <ProtectedRoute>
+                <SellerDetail />
+              </ProtectedRoute>
+            }/>
             <Route path="/profile" element={
               <ProtectedRoute>
                 <Profile/>
