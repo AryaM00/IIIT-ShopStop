@@ -20,6 +20,8 @@ const Signup = () => {
   useEffect(() => {
     const checkToken = () => {
       const user = JSON.parse(localStorage.getItem('user'));
+      if(user)
+      {
       const token = user.token;
 
       if (token && user) {
@@ -40,6 +42,7 @@ const Signup = () => {
           localStorage.removeItem('user');
         }
       }
+    }
     };
 
     checkToken();
