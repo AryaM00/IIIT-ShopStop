@@ -250,9 +250,9 @@ const signupUser = async (req, res) => {
     }
 
     // Email and contact validation...
-    const iiitEmailRegex = /^[a-zA-Z0-9._%+-]+@iiit\.ac\.in$/;
+    const iiitEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/
     if (!iiitEmailRegex.test(email)) {
-        return res.status(400).json({ error: 'Email must be a valid IIIT email address (e.g., user@iiit.ac.in).' });
+        return res.status(400).json({ error: 'Email must be a valid IIIT email address (e.g.,  user@students.iiit.ac.in).' });
     }
 
     const contactNumberRegex = /^\d{10}$/;
