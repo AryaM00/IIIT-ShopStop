@@ -33,11 +33,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/support', chatRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Serve frontend (if fullstack)
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-});
 
 // DB and Server Start
 mongoose.connect(process.env.MONGO_URI)
