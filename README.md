@@ -6,6 +6,10 @@ https://iiit-shop-stop.vercel.app
 ## Backend is deployed on 
 https://iiit-shopstop-backend.onrender.com
 
+## Guest credentials
+mail:guest@gmail.com
+password:guest
+
 ## How to Run
 
 ### Frontend
