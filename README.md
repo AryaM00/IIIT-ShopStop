@@ -1,5 +1,11 @@
 # IIIT ShopStop
 
+## Frontend is deployed on 
+https://iiit-shop-stop.vercel.app
+
+## Backend is deployed on 
+https://iiit-shopstop-backend.onrender.com
+
 ## How to Run
 
 ### Frontend
