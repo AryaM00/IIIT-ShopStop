@@ -54,7 +54,17 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     trim: true,
-    match: /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)*iiit\.ac\.in$/,
+    validate: {
+      validator: function(value) {
+        // Accept guest@gmail.com as valid
+        if (value === 'guest@gmail.com') {
+          return true;
+        }
+        // Otherwise apply IIIT email validation
+        return /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)*iiit\.ac\.in$/.test(value);
+      },
+      message: props => `${props.value} is not a valid email address.`
+    }
   },
   age: {
     type: Number,

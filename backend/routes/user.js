@@ -25,7 +25,8 @@ const router = express.Router();
 require('events').EventEmitter.defaultMaxListeners = 15;
 
 // Login route
-router.post('/login', verifyCaptcha, loginUser);
+// router.post('/login', verifyCaptcha, loginUser);
+router.post('/login', loginUser); // Removed captcha verification for now
 
 // Signup route
 router.post('/signup', signupUser);

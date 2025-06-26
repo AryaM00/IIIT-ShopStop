@@ -51,7 +51,8 @@ const Signup = () => {
 
 
   // Validation helper
-  const isEmailValid = email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/);
+  const isGuestEmail = email === 'guest@gmail.com';
+  const isEmailValid = isGuestEmail || email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/);
   const isContactNumberValid = contactNumber.match(/^\d{10}$/);
   const isPasswordMatching = password === confirmPassword;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Grid, Box, Alert, CircularProgress, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [captchaValue, setCaptchaValue] = useState(null);
+  // const [captchaValue, setCaptchaValue] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const checkToken = () => {
@@ -46,7 +46,9 @@ const Login = () => {
     checkToken();
   }, [navigate]);
 
-  const isEmailValid = email.match( /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)*iiit\.ac\.in$/);
+  // Validation helper
+  const isGuestEmail = email === 'guest@gmail.com';
+  const isEmailValid = isGuestEmail || email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +56,7 @@ const Login = () => {
 
     if (!isEmailValid) return setError('Invalid IIIT email format');
     if (!password) return setError('Password is required');
-    if (!captchaValue) return setError('Please complete the captcha');
+    // if (!captchaValue) return setError('Please complete the captcha');
 
     setLoading(true);
     try {
@@ -66,7 +68,7 @@ const Login = () => {
         body: JSON.stringify({ 
           email, 
           password,
-          captchaToken: captchaValue 
+          captchaToken: 'bypass-captcha-validation' // Add this dummy token
         }),
       });
       const data = await response.json();
@@ -84,9 +86,9 @@ const Login = () => {
     setLoading(false);
   };
 
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
-  };
+  // const handleCaptchaChange = (value) => {
+  //   setCaptchaValue(value);
+  // };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -147,12 +149,12 @@ const Login = () => {
                 )
               }}
             />
-            <Box my={3} display="flex" justifyContent="center">
+            {/* <Box my={3} display="flex" justifyContent="center">
               <ReCAPTCHA
                 sitekey="6LeAf8UqAAAAAJ6Tnp7F8xNg5tEVgXBOXHrR26Cf"
                 onChange={handleCaptchaChange}
               />
-            </Box>
+            </Box> */}
             {error && <Alert severity="error" style={{ marginTop: '1rem' }}>{error}</Alert>}
             <Box mt={3}>
               <Button 
@@ -160,7 +162,8 @@ const Login = () => {
                 variant="contained" 
                 color="primary" 
                 fullWidth 
-                disabled={loading || !captchaValue}
+                // disabled={loading || !captchaValue}
+                disabled={loading}
                 style={{ height: '50px' }}
               >
                 {loading ? <CircularProgress size={24} color="inherit" /> : 'Login'}
@@ -174,6 +177,7 @@ const Login = () => {
               >
                 CAS LOGIN
               </Button>
+              
             </Box>
           </form>
         </Box>

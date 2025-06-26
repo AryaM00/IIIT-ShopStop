@@ -249,10 +249,15 @@ const signupUser = async (req, res) => {
         return res.status(400).json({ error: 'All fields are required.' });
     }
 
-    // Email and contact validation...
-    const iiitEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/
-    if (!iiitEmailRegex.test(email)) {
-        return res.status(400).json({ error: 'Email must be a valid IIIT email address (e.g.,  user@students.iiit.ac.in).' });
+    // Special case for guest account
+    const isGuestAccount = email === 'guest@gmail.com';
+
+    // Email and contact validation (skip IIIT email validation for guest account)
+    if (!isGuestAccount) {
+        const iiitEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.?iiit\.ac\.in$/
+        if (!iiitEmailRegex.test(email)) {
+            return res.status(400).json({ error: 'Email must be a valid IIIT email address (e.g., user@students.iiit.ac.in).' });
+        }
     }
 
     const contactNumberRegex = /^\d{10}$/;
@@ -269,6 +274,7 @@ const signupUser = async (req, res) => {
             age,
             contactNumber,
             password,
+            isGuest: isGuestAccount // Add this flag to identify guest accounts
         });
 
         // Save user
@@ -285,7 +291,8 @@ const signupUser = async (req, res) => {
                 lastName: savedUser.lastName,
                 email: savedUser.email,
                 age: savedUser.age,
-                contactNumber: savedUser.contactNumber
+                contactNumber: savedUser.contactNumber,
+                isGuest: savedUser.isGuest
             },
             token 
         });
